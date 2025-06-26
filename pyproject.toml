@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paraparty-social-auth"
+version = "0.0.0"
+description = "A social core module for paraparty platform"
+readme = "README.md"
+dependencies = ["social-auth-core"]
+
+[project.urls]
+Homepage = "https://github.com/ParaParty/paraparty_social_core"
