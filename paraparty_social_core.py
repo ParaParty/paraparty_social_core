@@ -6,6 +6,9 @@ from social_core.backends.open_id_connect import OpenIdConnectAuth
 class ParaPartyOidc(OpenIdConnectAuth):
     name = "paraparty"
 
+    ID_KEY = 'username'
+    USERNAME_KEY = 'username'
+
     def __init__(self, *args, **kwargs):
         """
         Initialize the backend, loading the OIDC endpoint from environment.
