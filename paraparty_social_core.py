@@ -1,4 +1,6 @@
+import json
 import os
+import html
 
 from social_core.backends.open_id_connect import OpenIdConnectAuth
 
@@ -42,3 +44,31 @@ class ParaPartyOidc(OpenIdConnectAuth):
             "first_name": attributes.get("given_name"),
             "last_name": attributes.get("family_name"),
         }
+
+    def uses_redirect(self):
+        """
+        Make Weblate Happy
+        """
+        return False
+
+    def auth_html(self):
+        """
+        Make Weblate Happy
+
+        Return an HTML page that redirects the user to the authorization URL.
+        """
+        url = self.auth_url()
+        safe_url = html.escape(url, quote=True)
+        safe_url_json = json.dumps(url)
+
+        return f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0; url={safe_url}">
+    <title>Redirecting...</title>
+    <script>window.location.href = {safe_url_json};</script>
+</head>
+<body>
+    <p>Redirecting to <a href="{safe_url}">this page</a>. If you are not redirected automatically, click the link.</p>
+</body>
+</html>"""
